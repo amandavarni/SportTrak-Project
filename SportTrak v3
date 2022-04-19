@@ -1,0 +1,116 @@
+import tkinter as tk
+
+# Class Definition
+class Tkinter_Example:
+
+    # class constructor
+    def __init__(self):
+
+        # Instantiate Tkinter Window 
+        window = tk.Tk()
+
+        # Class Members
+        self.User_ID_Var = tk.StringVar()
+        self.Select_Sport_Var = tk.StringVar()
+        self.Event_Date_Var = tk.StringVar()
+        self.Expected_Weather_Var = tk.StringVar()
+        self.Opponent_Var = tk.StringVar()
+        self.Student_Attendance_Var = tk.StringVar()
+        self.Non_Student_Attendance_Var = tk.StringVar()
+
+        # reference these values to display computations
+        self.Hot_Dogs_Var = tk.StringVar()
+        self.Nachos_Var = tk.StringVar()
+        self.Pretzels_Var = tk.StringVar()
+        self.Burgers_Var = tk.StringVar()
+        self.Water_Var = tk.StringVar()
+        self.Beer_Var = tk.StringVar()
+        self.Soda_Var = tk.StringVar()
+        self.Staffing_Var = tk.StringVar()
+
+        # Set title of the window
+        window.title("SportTrak")
+
+        # Create labels for user input values
+        tk.Label(window, text = "User ID: ").grid(row = 2, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Select Sport: ").grid(row = 3, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Event Date: ").grid(row = 4, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Expected Weather").grid(row = 5, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Opponent: ").grid(row = 6, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Expected Student Attendence: ").grid(row = 7, column = 1, sticky = tk.W)
+        tk.Label(window, text = "Expected Non-Student Attendence: ").grid(row = 8, column = 1, sticky = tk.W)
+
+        # Create labels for the program outout values
+        tk.Label(window, text = "Hot Dogs: ").grid(row = 2, column = 3, sticky = tk.E)
+        tk.Label(window, text = "Nachos: ").grid(row = 3, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Pretzels: ").grid(row = 4, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Burgers: ").grid(row = 5, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Water: ").grid(row = 6, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Beer: ").grid(row = 7, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Soda: ").grid(row = 8, column = 3, sticky = tk.W)
+        tk.Label(window, text = "Staffing: ").grid(row = 9, column = 3, sticky = tk.W)
+
+        # Create input boxes for users to pass values through Entry control (IS THIS WHERE I ADD CONDITIONS LIKE PASSOWRD LENGTH?)
+        tk.Entry(window, textvariable = self.User_ID_Var, justify = tk.RIGHT).grid(row = 2, column = 2) #lengths
+        tk.Entry(window, textvariable = self.Select_Sport_Var, justify =tk.RIGHT).grid(row = 3, column = 2) #four sports
+        tk.Entry(window, textvariable = self.Event_Date_Var, justify =tk.RIGHT).grid(row = 4, column = 2) #date format only
+        tk.Entry(window, textvariable = self.Expected_Weather_Var, justify =tk.RIGHT).grid(row = 5, column = 2) #two integers
+        tk.Entry(window, textvariable = self.Opponent_Var, justify =tk.RIGHT).grid(row = 6, column = 2) #yes or no only
+        tk.Entry(window, textvariable = self.Student_Attendance_Var, justify =tk.RIGHT).grid(row = 7, column = 2) #integer
+        tk.Entry(window, textvariable = self.Non_Student_Attendance_Var, justify =tk.RIGHT).grid(row = 8, column = 2) #integer
+
+        #For each of the eight outputs, self. a String variable and output each to a Label in the Window
+        tk.Label(window, textvariable = self.Hot_Dogs_Var).grid(row = 2, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Nachos_Var).grid(row = 3, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Pretzels_Var).grid(row = 4, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Burgers_Var).grid(row = 5, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Water_Var).grid(row = 6, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Beer_Var).grid(row = 7, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Soda_Var).grid(row = 8, column = 5, sticky = tk.E)
+        tk.Label(window, textvariable = self.Staffing_Var).grid(row = 9, column = 5, sticky = tk.E)
+
+
+        tk.Button(window, text = "Compute", command = self.program_computations).grid(row = 9, column = 2, sticky = tk.E)
+
+        window.mainloop()
+    
+    
+    def program_computations(self):
+        # call all computation functions here!!!!
+        self.compute_weather(int(self.Expected_Weather_Var.get()),int(self.Student_Attendance_Var.get()))
+        self.compute_opponent(10,10)
+
+# total_attend = self.Student_Attendance_Var + self.Non_Student_Attendance_Var ??????
+
+    # Class Function
+    def compute_weather(self,weather,attendence):
+        
+        if weather > 80:
+            attendence *= -0.1
+
+        elif weather < 50:
+            attendence *= -0.2
+
+        else:
+            attendence *= 1
+        
+        self.Hot_Dogs_Var.set(int(attendence))
+        self.Nachos_Var.set(int(attendence))
+        self.Burgers_Var.set(int(attendence))
+        self.Pretzels_Var.set(int(attendence))
+        self.Water_Var.set(int(attendence))
+        self.Beer_Var.set(int(attendence))
+        self.Soda_Var.set(int(attendence))
+        self.Staffing_Var.set(int(attendence))
+
+    def compute_opponent(self,opponent,attendance):
+        attendance = attendance
+        if opponent == 'Yes':
+            attendance *= 1.2
+        else:
+            attendance = attendance
+
+
+### PROGRAM WILL START HERE AND WORK DOWNWARDS ###
+# Instance of my Class
+tkinter_app = Tkinter_Example()
